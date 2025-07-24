@@ -1,0 +1,73 @@
+.main {
+  font-family: "Arial", sans-serif;
+  background-color: #f2f2f2;
+}
+
+.hero {
+  background-image: url("/images/hero-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 80px 24px 40px;
+  text-align: center;
+  color: white;
+}
+
+.hero h1 {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffd15b;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  color: white;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 20px 32px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.recipeCount {
+  margin-left: auto;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  padding: 40px;
+  justify-content: center;
+}
+
+.selectedTags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.selectedTag {
+  background: #ffd15b;
+  color: black;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.selectedTag button {
+  margin-left: 8px;
+  background: transparent;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}

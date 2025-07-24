@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-radius: 11px;
+  overflow: hidden;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.input {
+  flex: 1;
+  padding: 18px 24px;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.button {
+  background-color: #1b1b1b;
+  color: white;
+  width: 52px;
+  height: 52px;
+  border-radius: 20%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 6px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-color: #333;
+}
+
+.icon {
+  width: 32px; /* taille identique à la maquette */
+  height: 32px;
+}
