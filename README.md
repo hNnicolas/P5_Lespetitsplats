@@ -1,8 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Les Petits Plats
 
-## Getting Started
+> Projet 5 - OpenClassrooms - Développeur Front-End
 
-First, run the development server:
+---
+
+## 🌐 Présentation
+
+Ce projet a pour objectif de créer une application web dynamique pour afficher et rechercher des recettes de cuisine.  
+Je travaille ici en tant que développeur front-end, sans base de données mais avec des données JSON locales, afin de simuler un moteur de recherche multicritères performant.
+
+Les utilisateurs peuvent consulter les recettes, effectuer une recherche par mots-clés, ou affiner leur recherche à l’aide de filtres comme les **ingrédients**, **ustensiles** ou **appareils**.
+
+---
+
+## ⚙️ Architecture du projet
+
+Le projet repose entièrement sur le **framework Next.js** (React 18), sans backend, et avec une gestion dynamique des composants via les hooks (`useState`, `useEffect`, `useMemo`).
+
+### 📁 Dossiers principaux
+
+- `app/components` : composants réutilisables (carte recette, header, footer, dropdowns…)
+- `app/data` : contient le fichier `recipes.json` avec les 50 recettes
+- `public/images` : toutes les images associées aux recettes
+- `app/recette/[slug]` : page dynamique affichant le détail d’une recette
+
+---
+
+## 🛠️ Fonctionnalités principales
+
+### 🔍 Moteur de recherche avancé
+
+- Recherche par mot-clé dans le titre, la description ou les ingrédients.
+- Filtres dynamiques (tags) : ingrédients, appareils, ustensiles.
+- Actualisation des tags disponibles en fonction des recettes filtrées.
+- Système de suppression / ajout de tags sélectionnés.
+
+### 🧩 Composants réactifs
+
+- `SearchBar` : champ de recherche global avec filtre intelligent.
+- `FilterDropdown` : listes déroulantes interactives avec recherche interne.
+- `RecipeCard` : affichage des recettes avec visuel, temps et contenu.
+- `RecipeList` : mise à jour dynamique des recettes affichées.
+
+### 🖼️ Responsive Design
+
+- Interface adaptable aux formats mobile, tablette et desktop.
+- Layout global propre et structuré avec typographie Google Fonts.
+
+---
+
+## 🚀 Lancer le projet
+
+1. **Cloner le dépôt** :
+   ```bash
+   git clone git@github.com:hNnicolas/P5_Lespetitsplats.git
+   cd P5_Lespetitsplats
+   ```
 
 ```bash
 npm run dev
@@ -13,24 +66,3 @@ pnpm dev
 # or
 bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
