@@ -1,10 +1,13 @@
 .header {
   position: relative;
-  height: 600px;
+  width: 100vw; /* toute la largeur de l'écran */
+  height: 600px; /* hauteur ajustable */
   background-image: url("/images/hero-background.webp");
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   color: white;
+  overflow: hidden;
 }
 
 .overlay {
@@ -24,6 +27,7 @@
 .logo {
   width: 160px;
   height: auto;
+  margin-top: 20px;
 }
 
 .heroContent {
