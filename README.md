@@ -49,6 +49,17 @@ Le projet repose entièrement sur le **framework Next.js** (React 18), sans back
 
 ---
 
+## 🔗 Démo en ligne
+
+👉 [Voir le site](https://p5-lespetitsplats.netlify.app/)
+
+---
+
+## 🖼️ Aperçu
+
+![Aperçu du projet](./images/screenshot.png)
+
+
 ## 🚀 Lancer le projet
 
 1. **Cloner le dépôt** :
