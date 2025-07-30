@@ -13,6 +13,18 @@ Les utilisateurs peuvent consulter les recettes, effectuer une recherche par mot
 
 ---
 
+## 🔗 Démo en ligne
+
+👉 [Voir le site](https://p5-lespetitsplats.netlify.app/)
+
+---
+
+## 🖼️ Aperçu
+
+![Aperçu du projet](public/images/screenshot.png)
+
+---
+
 ## ⚙️ Architecture du projet
 
 Le projet repose entièrement sur le **framework Next.js** (React 18), sans backend, et avec une gestion dynamique des composants via les hooks (`useState`, `useEffect`, `useMemo`).
@@ -49,31 +61,10 @@ Le projet repose entièrement sur le **framework Next.js** (React 18), sans back
 
 ---
 
-## 🔗 Démo en ligne
-
-👉 [Voir le site](https://p5-lespetitsplats.netlify.app/)
-
----
-
-## 🖼️ Aperçu
-
-![Aperçu du projet](./images/screenshot.png)
-
-
 ## 🚀 Lancer le projet
 
 1. **Cloner le dépôt** :
    ```bash
    git clone git@github.com:hNnicolas/P5_Lespetitsplats.git
    cd P5_Lespetitsplats
-   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
