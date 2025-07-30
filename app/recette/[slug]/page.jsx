@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
+import styles from "./RecipePage.module.css";
 
 export default function RecipePage({ params }) {
   const recipe = recipes.find((r) => r.slug === params.slug);
@@ -11,52 +12,75 @@ export default function RecipePage({ params }) {
     notFound();
   }
 
+  // Découper la description en étapes
+  const steps = recipe.description
+    .split(/(?<=[.!?])\s+(?=[A-ZÉÀ])/)
+    .filter((s) => s.trim().length > 0);
+
   return (
     <>
-      {/* Header avec le logo uniquement */}
       <Header minimal={true} />
 
-      <main style={{ padding: "1rem", maxWidth: 800, margin: "auto" }}>
-        <h1>{recipe.name}</h1>
+      <main className={styles.page}>
+        {/* Colonne image */}
+        <div className={styles.imageContainer}>
+          <Image
+            src={`/images/${recipe.image}`}
+            alt={`Photo de ${recipe.name}`}
+            width={600}
+            height={600}
+            className={styles.image}
+          />
+        </div>
 
-        <Image
-          src={`/images/${recipe.image}`}
-          alt={`Photo de ${recipe.name}`}
-          width={600}
-          height={400}
-          style={{ borderRadius: 8 }}
-        />
+        {/* Colonne contenu */}
+        <div className={styles.content}>
+          <h1 className={styles.title}>{recipe.name}</h1>
 
-        <p>{recipe.description}</p>
+          <span className={styles.time}>{recipe.time}min</span>
 
-        <h2>Ingrédients :</h2>
-        <ul>
-          {recipe.ingredients.map((ing, i) => (
-            <li key={i}>
-              {ing.ingredient}
-              {ing.quantity ? ` : ${ing.quantity} ${ing.unit || ""}` : ""}
-            </li>
-          ))}
-        </ul>
+          <div className={styles.section}>
+            <h3>Ingrédients</h3>
+            <ul>
+              {recipe.ingredients.map((ing, i) => (
+                <li key={i}>
+                  {ing.ingredient}
+                  {ing.quantity ? ` : ${ing.quantity} ${ing.unit || ""}` : ""}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        <h2>Appareil :</h2>
-        <p>{recipe.appliance}</p>
+          <div className={styles.section}>
+            <h3>Ustensiles nécessaires</h3>
+            <ul>
+              {recipe.ustensils.map((u, i) => (
+                <li key={i}>{u}</li>
+              ))}
+            </ul>
+          </div>
 
-        <h2>Ustensiles :</h2>
-        <ul>
-          {recipe.ustensils.map((u, i) => (
-            <li key={i}>{u}</li>
-          ))}
-        </ul>
+          <div className={styles.section}>
+            <h3>Appareils nécessaires</h3>
+            <p>{recipe.appliance}</p>
+          </div>
+
+          <div className={styles.section}>
+            <h3>Recette</h3>
+            <ol>
+              {steps.map((step, i) => (
+                <li key={i}>{step}</li>
+              ))}
+            </ol>
+          </div>
+        </div>
       </main>
 
-      {/* Footer inchangé */}
       <Footer />
     </>
   );
 }
 
-// Génère les pages statiques pour chaque recette
 export async function generateStaticParams() {
   return recipes.map((recipe) => ({
     slug: recipe.slug,

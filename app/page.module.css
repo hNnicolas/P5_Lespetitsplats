@@ -67,6 +67,7 @@
 .selectedTag button {
   margin-left: 8px;
   background: transparent;
+  color: black;
   border: none;
   font-weight: bold;
   cursor: pointer;
