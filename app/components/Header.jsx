@@ -1,12 +1,13 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import SearchBar from './SearchBar';
-import styles from './Header.module.css';
+import Image from "next/image";
+import SearchBar from "./SearchBar";
+import styles from "./Header.module.css";
+import clsx from "clsx";
 
-export default function Header() {
+export default function Header({ onSearchSubmit, minimal = false }) {
   return (
-    <header className={styles.header}>
+    <header className={clsx(styles.header, minimal && styles.minimal)}>
       <div className={styles.overlay}>
         <div className={styles.topBar}>
           <Image
@@ -18,13 +19,16 @@ export default function Header() {
           />
         </div>
 
-        <div className={styles.heroContent}>
-          <h1 className={styles.title}>
-            DÉCOUVREZ NOS RECETTES<br />
-            <span>DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES</span>
-          </h1>
-          <SearchBar />
-        </div>
+        {!minimal && (
+          <div className={styles.heroContent}>
+            <h1 className={styles.title}>
+              DÉCOUVREZ NOS RECETTES
+              <br />
+              <span>DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES</span>
+            </h1>
+            <SearchBar onSearchSubmit={onSearchSubmit} />
+          </div>
+        )}
       </div>
     </header>
   );

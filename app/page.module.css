@@ -51,7 +51,7 @@
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  margin: 20px 0;
+  margin: 20px 40px;
 }
 
 .selectedTag {

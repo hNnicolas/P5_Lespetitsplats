@@ -8,7 +8,7 @@
 }
 
 .overlay {
-  background-color: rgba(0, 0, 0, 0.5); /* un peu plus foncé */
+  background-color: rgba(0, 0, 0, 0.5);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -30,8 +30,9 @@
   text-align: center;
   margin: 0 auto;
   max-width: 800px;
-  margin-bottom: 80px; /* force plus d'espace avec le bas */
+  margin-bottom: 80px;
 }
+
 .title {
   font-size: 36px;
   font-weight: bold;
@@ -40,7 +41,7 @@
 }
 
 .title span {
-  color: white;
+  color: #ffd15b;
 }
 
 @media (max-width: 768px) {
@@ -51,4 +52,20 @@
   .overlay {
     padding: 20px;
   }
+}
+
+.minimal {
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.minimal .heroContent {
+  display: none;
+}
+
+.minimal .overlay {
+  justify-content: flex-start;
+  padding: 20px 40px;
 }

@@ -9,8 +9,8 @@ export default function SearchBar({ onSearchSubmit }) {
 
   const handleSearch = () => {
     const trimmed = searchInput.trim();
-    console.log("Recherche déclenchée :", trimmed);
     if (trimmed && typeof onSearchSubmit === "function") {
+      console.log("Recherche déclenchée :", trimmed);
       onSearchSubmit(trimmed);
       setSearchInput("");
     }

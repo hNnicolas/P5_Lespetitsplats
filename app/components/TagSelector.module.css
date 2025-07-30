@@ -1,0 +1,33 @@
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tag {
+  background: #ededed;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.activeTag {
+  background: #ffd15b;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 8px;
+}
+
+.selectedTags {
+  margin-bottom: 16px;
+}
+
+.results {
+  list-style: none;
+  padding: 0;
+}
