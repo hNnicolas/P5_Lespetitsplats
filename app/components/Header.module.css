@@ -1,7 +1,7 @@
 .header {
   position: relative;
-  width: 100vw; /* toute la largeur de l'écran */
-  height: 600px; /* hauteur ajustable */
+  width: 100vw;
+  height: 800px;
   background-image: url("/images/hero-background.webp");
   background-size: cover;
   background-position: center;
@@ -34,7 +34,7 @@
   text-align: center;
   margin: 0 auto;
   max-width: 800px;
-  margin-bottom: 80px;
+  margin-bottom: 300px;
 }
 
 .title {

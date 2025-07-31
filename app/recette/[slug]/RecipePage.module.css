@@ -5,11 +5,7 @@
   display: flex;
   gap: 3rem;
   font-family: "Inter", sans-serif;
-
-  /* Ajouts pour positionner footer en bas */
-  min-height: calc(
-    100vh - 60px
-  ); /* ajuster 60px selon la hauteur de ton header + footer */
+  min-height: calc(100vh - 60px);
   flex-grow: 1;
 }
 
@@ -17,13 +13,14 @@
   flex: 1;
   border-radius: 16px;
   overflow: hidden;
+  height: 600px;
 }
 
 .image {
   border-radius: 16px;
   object-fit: cover;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 .content {
@@ -42,10 +39,12 @@
   background-color: #ffd15b;
   color: black;
   font-weight: bold;
-  padding: 0.3rem 0.8rem;
-  border-radius: 8px;
+  padding: 4px 2px;
+  border-radius: 10px;
   display: inline-block;
   margin-bottom: 1rem;
+  max-width: fit-content;
+  text-align: left;
 }
 
 .section h3 {
