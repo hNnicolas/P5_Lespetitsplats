@@ -5,7 +5,7 @@
 
 .hero {
   background-image: url("/images/hero-bg.jpg");
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   padding: 80px 24px 40px;
   text-align: center;
@@ -28,7 +28,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  margin: 20px 32px;
+  margin: 20px 210px;
   flex-wrap: wrap;
   justify-content: flex-start;
 }
@@ -57,6 +57,7 @@
 .selectedTag {
   background: #ffd15b;
   color: black;
+  margin-left: 180px;
   padding: 6px 10px;
   border-radius: 20px;
   font-weight: 500;
@@ -71,4 +72,36 @@
   border: none;
   font-weight: bold;
   cursor: pointer;
+}
+
+/* Responsive mobile */
+@media (max-width: 768px) {
+  .hero {
+    background-size: contain;
+    background-position: center top;
+    padding: 40px 12px 20px;
+  }
+
+  .hero h1 {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .filters {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 10px 12px;
+    align-items: stretch;
+  }
+
+  .filters button {
+    width: 100%;
+  }
+
+  .recipeCount {
+    font-size: 16px;
+    margin-left: 0;
+    margin-top: 10px;
+  }
 }

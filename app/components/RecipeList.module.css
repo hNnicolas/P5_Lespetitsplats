@@ -1,9 +1,10 @@
 .recipeList {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 5rem;
   padding: 2rem 1rem;
 }
+
 
 @media (max-width: 1024px) {
   .recipeList {
