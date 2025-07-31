@@ -68,3 +68,10 @@ Le projet repose entièrement sur le **framework Next.js** (React 18), sans back
    git clone git@github.com:hNnicolas/P5_Lespetitsplats.git
    cd P5_Lespetitsplats
 
+2. **Installer les dépendances** :
+   ```bash
+   npm install
+
+3. **Lancer le projet en locale** :
+   ```bash
+   npm run dev
