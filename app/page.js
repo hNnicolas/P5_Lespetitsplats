@@ -30,6 +30,7 @@ export default function HomePage() {
   const handleSelectTag = (tag) => {
     if (!selectedTags.includes(tag)) {
       setSelectedTags((prev) => [...prev, tag]);
+      setSearchTerm("");
     }
   };
 
@@ -97,10 +98,18 @@ export default function HomePage() {
   }, [filteredRecipes]);
 
   // Fonction pour filtrer les tags visibles dans chaque dropdown selon la recherche partielle dans ce dropdown
-  const filterDropdownTags = (tags, searchInDropdown) =>
-    tags
-      .filter((tag) => !selectedTags.includes(tag))
+  const filterDropdownTags = (tags, searchInDropdown) => {
+    const loweredSearchTerm = searchTerm.toLowerCase();
+
+    return tags
+      .filter((tag) => {
+        const isSelected = selectedTags.includes(tag);
+        const isInSearchTerm =
+          searchTerm.length >= 3 && tag.includes(loweredSearchTerm);
+        return !isSelected && !isInSearchTerm;
+      })
       .filter((tag) => tag.includes(searchInDropdown.toLowerCase()));
+  };
 
   return (
     <main className={styles.main}>
