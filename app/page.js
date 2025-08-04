@@ -11,78 +11,122 @@ import styles from "./page.module.css";
 
 export default function HomePage() {
   const [selectedTags, setSelectedTags] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(""); // recherche principale
+  const [searchInIngredients, setSearchInIngredients] = useState("");
+  const [searchInAppareils, setSearchInAppareils] = useState("");
+  const [searchInUstensiles, setSearchInUstensiles] = useState("");
 
-  // Tags uniques
-  const ingredients = useMemo(() => {
-    const all = recipesData.flatMap((r) =>
-      r.ingredients.map((i) => i.ingredient.toLowerCase())
-    );
-    return [...new Set(all)];
-  }, []);
+  // Fonction appelée par la barre de recherche principale
+  const handleSearchSubmit = (term) => {
+    const lowerTerm = term.toLowerCase();
 
-  const appareils = useMemo(() => {
-    const all = recipesData.map((r) => r.appliance.toLowerCase());
-    return [...new Set(all)];
-  }, []);
+    if (!selectedTags.includes(lowerTerm)) {
+      setSelectedTags((prev) => [...prev, lowerTerm]);
+    }
+    setSearchTerm(lowerTerm);
+  };
 
-  const ustensiles = useMemo(() => {
-    const all = recipesData.flatMap((r) =>
-      r.ustensils.map((u) => u.toLowerCase())
-    );
-    return [...new Set(all)];
-  }, []);
-
-  // Filtrer les recettes selon les tags sélectionnés avec inclusions partielles
-  const filteredRecipes = useMemo(() => {
-    if (selectedTags.length === 0) return recipesData;
-
-    return recipesData.filter((recipe) => {
-      const recipeTags = [
-        ...recipe.ingredients.map((i) => i.ingredient.toLowerCase()),
-        recipe.appliance.toLowerCase(),
-        ...recipe.ustensils.map((u) => u.toLowerCase()),
-      ];
-      return selectedTags.every((tag) =>
-        recipeTags.some((recipeTag) => recipeTag.includes(tag))
-      );
-    });
-  }, [selectedTags]);
-
-  // Ajouter un tag s’il n’est pas déjà sélectionné
-  const handleSelect = (tag) => {
+  // Ajouter un tag sélectionné
+  const handleSelectTag = (tag) => {
     if (!selectedTags.includes(tag)) {
       setSelectedTags((prev) => [...prev, tag]);
     }
   };
 
-  // Supprimer un tag
-  const handleRemove = (tagToRemove) => {
+  // Supprimer un tag sélectionné
+  const handleRemoveTag = (tagToRemove) => {
     setSelectedTags((prev) => prev.filter((t) => t !== tagToRemove));
   };
 
-  // Tags disponibles (non sélectionnés)
-  const getAvailableTags = (list) =>
-    list.filter((tag) => !selectedTags.includes(tag));
+  // Filtrer les recettes en fonction de la recherche principale et des tags sélectionnés
+  const filteredRecipes = useMemo(() => {
+    let filtered = recipesData;
+
+    // Recherche libre dans titre, description, ingrédients
+    if (searchTerm.length >= 3) {
+      filtered = filtered.filter((recipe) => {
+        const title = recipe.name.toLowerCase();
+        const description = recipe.description.toLowerCase();
+        const ingredientsText = recipe.ingredients
+          .map((i) => i.ingredient.toLowerCase())
+          .join(" ");
+
+        return (
+          title.includes(searchTerm) ||
+          description.includes(searchTerm) ||
+          ingredientsText.includes(searchTerm)
+        );
+      });
+    }
+
+    // Filtrage par tags sélectionnés (ingrédients, appareils, ustensiles)
+    if (selectedTags.length > 0) {
+      filtered = filtered.filter((recipe) => {
+        const recipeTags = [
+          ...recipe.ingredients.map((i) => i.ingredient.toLowerCase()),
+          recipe.appliance.toLowerCase(),
+          ...recipe.ustensils.map((u) => u.toLowerCase()),
+        ];
+        return selectedTags.every((tag) =>
+          recipeTags.some((recipeTag) => recipeTag.includes(tag))
+        );
+      });
+    }
+
+    return filtered;
+  }, [searchTerm, selectedTags]);
+
+  // Calculer les tags uniques des recettes filtrées pour chaque catégorie
+  const ingredients = useMemo(() => {
+    const all = filteredRecipes.flatMap((r) =>
+      r.ingredients.map((i) => i.ingredient.toLowerCase())
+    );
+    return [...new Set(all)];
+  }, [filteredRecipes]);
+
+  const appareils = useMemo(() => {
+    const all = filteredRecipes.map((r) => r.appliance.toLowerCase());
+    return [...new Set(all)];
+  }, [filteredRecipes]);
+
+  const ustensiles = useMemo(() => {
+    const all = filteredRecipes.flatMap((r) =>
+      r.ustensils.map((u) => u.toLowerCase())
+    );
+    return [...new Set(all)];
+  }, [filteredRecipes]);
+
+  // Fonction pour filtrer les tags visibles dans chaque dropdown selon la recherche partielle dans ce dropdown
+  const filterDropdownTags = (tags, searchInDropdown) =>
+    tags
+      .filter((tag) => !selectedTags.includes(tag))
+      .filter((tag) => tag.includes(searchInDropdown.toLowerCase()));
 
   return (
     <main className={styles.main}>
-      <Header onSearchSubmit={handleSelect} />
+      <Header onSearchSubmit={handleSearchSubmit} />
 
       <div className={styles.filters}>
         <FilterDropdown
           label="Ingrédients"
-          tags={getAvailableTags(ingredients)}
-          onSelect={handleSelect}
+          tags={filterDropdownTags(ingredients, searchInIngredients)}
+          searchValue={searchInIngredients}
+          onSearchChange={setSearchInIngredients}
+          onSelect={handleSelectTag}
         />
         <FilterDropdown
           label="Appareils"
-          tags={getAvailableTags(appareils)}
-          onSelect={handleSelect}
+          tags={filterDropdownTags(appareils, searchInAppareils)}
+          searchValue={searchInAppareils}
+          onSearchChange={setSearchInAppareils}
+          onSelect={handleSelectTag}
         />
         <FilterDropdown
           label="Ustensiles"
-          tags={getAvailableTags(ustensiles)}
-          onSelect={handleSelect}
+          tags={filterDropdownTags(ustensiles, searchInUstensiles)}
+          searchValue={searchInUstensiles}
+          onSearchChange={setSearchInUstensiles}
+          onSelect={handleSelectTag}
         />
         <span className={styles.recipeCount}>
           {filteredRecipes.length} recette
@@ -96,7 +140,7 @@ export default function HomePage() {
           <span key={tag} className={styles.selectedTag}>
             {tag}
             <button
-              onClick={() => handleRemove(tag)}
+              onClick={() => handleRemoveTag(tag)}
               aria-label={`Supprimer ${tag}`}
             >
               &times;

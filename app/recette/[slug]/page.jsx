@@ -5,8 +5,10 @@ import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import styles from "./RecipePage.module.css";
 
-export default function RecipePage({ params }) {
-  const recipe = recipes.find((r) => r.slug === params.slug);
+export default async function RecipePage({ params }) {
+  const { slug } = await params; // <-- await ici
+
+  const recipe = recipes.find((r) => r.slug === slug);
 
   if (!recipe) {
     notFound();

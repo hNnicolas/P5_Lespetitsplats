@@ -47,6 +47,7 @@ export default function FilterDropdown({ label, tags, onSelect }) {
                   key={tag}
                   className={styles.item}
                   onClick={() => {
+                    console.log("Tag cliqué dans FilterDropdown:", tag);
                     onSelect(tag);
                     setSearch("");
                   }}
